@@ -4,16 +4,16 @@ class MovieRental {
     private final String movieId;
     private final int days;
 
-    public MovieRental(String movieId, int days) {
+    MovieRental(String movieId, int days) {
         this.movieId = movieId;
         this.days = days;
     }
 
-    public String getMovieId() {
+    String getMovieId() {
         return movieId;
     }
 
-    public int getDays() {
+    int getDays() {
         return days;
     }
 }
