@@ -1,3 +1,5 @@
+package rentals;
+
 class MovieRental {
     private final String movieId;
     private final int days;

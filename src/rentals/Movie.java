@@ -1,3 +1,5 @@
+package rentals;
+
 class Movie {
     private final String title;
     private final String code;

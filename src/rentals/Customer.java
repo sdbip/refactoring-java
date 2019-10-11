@@ -1,3 +1,5 @@
+package rentals;
+
 import java.util.List;
 
 class Customer {
