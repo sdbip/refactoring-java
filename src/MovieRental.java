@@ -1,6 +1,6 @@
-public class MovieRental {
-    private String movieId;
-    private int days;
+class MovieRental {
+    private final String movieId;
+    private final int days;
 
     public MovieRental(String movieId, int days) {
         this.movieId = movieId;
