@@ -1,5 +1,7 @@
 package rentals;
 
+import static rentals.MovieType.*;
+
 public class RentalInfo {
 
   public String statement(Customer customer) {
@@ -12,16 +14,16 @@ public class RentalInfo {
       double thisAmount = 0;
 
       // determine amount for each movie
-      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("regular")) {
+      if (movieRepository.typeOfMovie(r.getMovieId()) == regular) {
         thisAmount = 2;
         if (r.getDays() > 2) {
           thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
         }
       }
-      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("new")) {
+      if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease) {
         thisAmount = r.getDays() * 3;
       }
-      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("childrens")) {
+      if (movieRepository.typeOfMovie(r.getMovieId()) == forChildren) {
         thisAmount = 1.5;
         if (r.getDays() > 3) {
           thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
@@ -31,7 +33,7 @@ public class RentalInfo {
       //add frequent bonus points
       frequentEnterPoints++;
       // add bonus for a two day new release rental
-      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("new") && r.getDays() > 2) frequentEnterPoints++;
+      if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease && r.getDays() > 2) frequentEnterPoints++;
 
       //print figures for this rental
       result.append("\t").append(movieRepository.movies.get(r.getMovieId()).getTitle()).append("\t").append(thisAmount).append("\n");
