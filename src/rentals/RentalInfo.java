@@ -1,14 +1,16 @@
 package rentals;
 
-import details.HardCodedMovieRepository;
-
 import static rentals.MovieType.*;
 
 public class RentalInfo {
 
-  public String statement(Customer customer) {
-    MovieRepository movieRepository = new HardCodedMovieRepository();
+  private final MovieRepository movieRepository;
 
+  public RentalInfo(final MovieRepository movieRepository) {
+    this.movieRepository = movieRepository;
+  }
+
+  public String statement(Customer customer) {
     double totalAmount = 0;
     int frequentEnterPoints = 0;
     StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n");

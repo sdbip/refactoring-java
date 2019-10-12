@@ -1,5 +1,6 @@
 package rentals;
 
+import details.HardCodedMovieRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ class AcceptanceTests {
                 new MovieRental("F001", 3),
                 new MovieRental("F002", 1));
 
-        final String result = new RentalInfo().statement(
+        final String result = new RentalInfo(new HardCodedMovieRepository()).statement(
                 new Customer("C. U. Stomer", rentals));
 
         final String expected = "Rental Record for C. U. Stomer\n" +
