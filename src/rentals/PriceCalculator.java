@@ -17,7 +17,7 @@ class PriceCalculator {
             thisAmount = regular.getPrice(rental.getDays());
         }
         if (repository.typeOfMovie(rental.getMovieId()) == newRelease) {
-            thisAmount = rental.getDays() * 3;
+            thisAmount = newRelease.getPrice(rental.getDays());
         }
         if (repository.typeOfMovie(rental.getMovieId()) == forChildren) {
             thisAmount = forChildren.getPrice(rental.getDays());

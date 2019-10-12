@@ -23,7 +23,14 @@ public enum MovieType {
                     BASE_PRICE + ((daysRented - STANDARD_DURATION_DAYS) * OVERDRAFT_FEE_PER_DAY);
         }
     },
-    newRelease;
+    newRelease {
+        private static final double FEE_PER_DAY = 3.0;
+
+        @Override
+        double getPrice(int daysRented) {
+            return FEE_PER_DAY * daysRented;
+        }
+    };
 
 
     double getPrice(int daysRented) {
