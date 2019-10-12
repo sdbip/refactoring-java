@@ -1,7 +1,5 @@
 package rentals;
 
-import static rentals.MovieType.*;
-
 class PriceCalculator {
     private final MovieRepository repository;
 
@@ -10,18 +8,7 @@ class PriceCalculator {
     }
 
     double getPrice(MovieRental rental) {
-        double thisAmount = 0;
-
-        // determine amount for each movie
-        if (repository.typeOfMovie(rental.getMovieId()) == regular) {
-            thisAmount = regular.getPrice(rental.getDays());
-        }
-        if (repository.typeOfMovie(rental.getMovieId()) == newRelease) {
-            thisAmount = newRelease.getPrice(rental.getDays());
-        }
-        if (repository.typeOfMovie(rental.getMovieId()) == forChildren) {
-            thisAmount = forChildren.getPrice(rental.getDays());
-        }
-        return thisAmount;
+        final MovieType typeOfMovie = repository.typeOfMovie(rental.getMovieId());
+        return typeOfMovie.getPrice(rental.getDays());
     }
 }
