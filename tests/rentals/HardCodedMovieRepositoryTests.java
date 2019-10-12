@@ -34,4 +34,20 @@ class HardCodedMovieRepositoryTests {
                             assertEquals(type, hardCodedMovieRepository.typeOfMovie(movieId)));
                 });
     }
+
+    @TestFactory
+    Stream<DynamicTest> returnsTheCorrectTitleForEachMovie() {
+        final Map<String, String> expecteds = Map.of(
+                "F001", "You've Got Mail",
+                "F002", "Matrix",
+                "F003", "Cars",
+                "F004", "Fast & Furious X");
+        return expecteds.entrySet().stream()
+                .map(entry -> {
+                    final String movieId = entry.getKey();
+                    final String title = entry.getValue();
+                    return dynamicTest(movieId, () ->
+                            assertEquals(title, hardCodedMovieRepository.titleOfMovie(movieId)));
+                });
+    }
 }

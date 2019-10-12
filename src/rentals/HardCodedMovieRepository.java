@@ -1,10 +1,9 @@
 package rentals;
 
-import java.security.InvalidKeyException;
 import java.util.HashMap;
 
 class HardCodedMovieRepository {
-    HashMap<String, Movie> movies = new HashMap<>();
+    private final HashMap<String, Movie> movies = new HashMap<>();
 
     HardCodedMovieRepository() {
         movies.put("F001", new Movie("You've Got Mail", "regular"));
@@ -25,5 +24,10 @@ class HardCodedMovieRepository {
             default:
                 return null;
         }
+    }
+
+    String titleOfMovie(String id) {
+        final Movie movie = movies.get(id);
+        return movie.getTitle();
     }
 }

@@ -36,7 +36,7 @@ public class RentalInfo {
       if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease && r.getDays() > 2) frequentEnterPoints++;
 
       //print figures for this rental
-      result.append("\t").append(movieRepository.movies.get(r.getMovieId()).getTitle()).append("\t").append(thisAmount).append("\n");
+      result.append("\t").append(movieRepository.titleOfMovie(r.getMovieId())).append("\t").append(thisAmount).append("\n");
       totalAmount = totalAmount + thisAmount;
     }
     // add footer lines
