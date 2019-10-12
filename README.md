@@ -11,3 +11,12 @@ Think: you are responsible for the solution, this is a solution you will have to
 Reason how you have been thinking and the decisions you took. 
 You can hand in the result any way you feel (pull-request, own fork or ZIP-file)
 Note: the Git history must be included.
+
+
+## To run the test:
+
+```
+cd src
+javac Main.java
+java Main
+```
