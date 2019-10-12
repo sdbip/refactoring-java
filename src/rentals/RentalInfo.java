@@ -1,7 +1,5 @@
 package rentals;
 
-import static rentals.MovieType.*;
-
 public class RentalInfo {
 
   private final MovieRepository movieRepository;
@@ -13,21 +11,16 @@ public class RentalInfo {
   }
 
   public String statement(Customer customer) {
-    int frequentEnterPoints = 0;
+    int frequentEnterPoints = new FrequentEnterPointsCalculator(movieRepository).getPoints(customer.getRentals());
     StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n");
     for (MovieRental r : customer.getRentals()) {
-      double thisAmount = priceCalculator.getPrice(r);
-
-      //add frequent bonus points
-      frequentEnterPoints++;
-      // add bonus for a two day new release rental
-      if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease && r.getDays() > 2) frequentEnterPoints++;
+      final double thisAmount = priceCalculator.getPrice(r);
 
       //print figures for this rental
       result.append("\t").append(movieRepository.titleOfMovie(r.getMovieId())).append("\t").append(thisAmount).append("\n");
     }
     // add footer lines
-    double totalAmount = priceCalculator.getTotalPrice(customer.getRentals());
+    final double totalAmount = priceCalculator.getTotalPrice(customer.getRentals().stream());
     result.append("Amount owed is ").append(totalAmount).append("\n");
     result.append("You earned ").append(frequentEnterPoints).append(" frequent points\n");
 
