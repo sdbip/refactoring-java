@@ -3,19 +3,16 @@ package rentals;
 import java.util.stream.Stream;
 
 class PriceCalculator {
-    private final MovieRepository repository;
-
-    PriceCalculator(MovieRepository repository) {
-        this.repository = repository;
-    }
-
-    double getTotalPrice(Stream<MovieRental> rentals) {
+    double getTotalPrice(Stream<MovieRental2> rentals) {
         return rentals.map(this::getPrice)
                 .reduce(0.0, Double::sum);
     }
 
-    double getPrice(MovieRental rental) {
-        final MovieType typeOfMovie = repository.typeOfMovie(rental.getMovieId());
-        return typeOfMovie.getPrice(rental.getDays());
+    private double getPrice(MovieRental2 rental) {
+        return rental.getTypeOfMovie().getPrice(rental.getDaysRented());
+    }
+
+    double getPrice(MovieType typeOfMovie, int daysRented){
+        return typeOfMovie.getPrice(daysRented);
     }
 }
