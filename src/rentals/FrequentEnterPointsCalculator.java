@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 import static rentals.MovieType.newRelease;
 
 class FrequentEnterPointsCalculator {
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     FrequentEnterPointsCalculator(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
