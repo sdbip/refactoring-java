@@ -13,9 +13,9 @@ class FrequentEnterPointsCalculator {
 
     int getPoints(Stream<MovieRental> rentals) {
         return rentals.map(r -> {
-            int frequentEnterPoints = 1;
-            if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease && r.getDays() > 2) frequentEnterPoints++;
-            return frequentEnterPoints;
+            final MovieType typeOfMovie = movieRepository.typeOfMovie(r.getMovieId());
+            final int daysRented = r.getDays();
+            return typeOfMovie == newRelease && daysRented > 2 ? 2 : 1;
         }).reduce(0, Integer::sum);
     }
 }
