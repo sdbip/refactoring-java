@@ -7,9 +7,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Tests {
+class AcceptanceTests {
     @Test
-    void ATest() {
+    void mainJSWillRun() {
         final List<MovieRental> rentals = Arrays.asList(
                 new MovieRental("F001", 3),
                 new MovieRental("F002", 1));
