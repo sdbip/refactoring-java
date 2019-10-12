@@ -5,7 +5,7 @@ import static rentals.MovieType.*;
 public class RentalInfo {
 
   public String statement(Customer customer) {
-    HardCodedMovieRepository movieRepository = new HardCodedMovieRepository();
+    MovieRepository movieRepository = new HardCodedMovieRepository();
 
     double totalAmount = 0;
     int frequentEnterPoints = 0;

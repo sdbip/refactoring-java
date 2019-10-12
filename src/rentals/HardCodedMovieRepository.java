@@ -2,7 +2,7 @@ package rentals;
 
 import java.util.HashMap;
 
-class HardCodedMovieRepository {
+class HardCodedMovieRepository implements MovieRepository {
     private final HashMap<String, Movie> movies = new HashMap<>();
 
     HardCodedMovieRepository() {
@@ -12,7 +12,8 @@ class HardCodedMovieRepository {
         movies.put("F004", new Movie("Fast & Furious X", "new"));
     }
 
-    MovieType typeOfMovie(String id) {
+    @Override
+    public MovieType typeOfMovie(String id) {
         final Movie movie = movies.get(id);
         switch (movie.getCode()) {
             case "regular":
@@ -26,7 +27,8 @@ class HardCodedMovieRepository {
         }
     }
 
-    String titleOfMovie(String id) {
+    @Override
+    public String titleOfMovie(String id) {
         final Movie movie = movies.get(id);
         return movie.getTitle();
     }
