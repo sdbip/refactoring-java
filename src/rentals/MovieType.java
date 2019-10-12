@@ -32,8 +32,5 @@ public enum MovieType {
         }
     };
 
-
-    double getPrice(int daysRented) {
-        return 0.0;
-    }
+    abstract double getPrice(int daysRented);
 }
