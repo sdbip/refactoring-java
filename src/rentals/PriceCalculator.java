@@ -9,23 +9,20 @@ class PriceCalculator {
         this.repository = repository;
     }
 
-    double getPrice(MovieRental r) {
+    double getPrice(MovieRental rental) {
         double thisAmount = 0;
 
         // determine amount for each movie
-        if (repository.typeOfMovie(r.getMovieId()) == regular) {
-            thisAmount = 2;
-            if (r.getDays() > 2) {
-                thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
-            }
+        if (repository.typeOfMovie(rental.getMovieId()) == regular) {
+            thisAmount = regular.getPrice(rental.getDays());
         }
-        if (repository.typeOfMovie(r.getMovieId()) == newRelease) {
-            thisAmount = r.getDays() * 3;
+        if (repository.typeOfMovie(rental.getMovieId()) == newRelease) {
+            thisAmount = rental.getDays() * 3;
         }
-        if (repository.typeOfMovie(r.getMovieId()) == forChildren) {
+        if (repository.typeOfMovie(rental.getMovieId()) == forChildren) {
             thisAmount = 1.5;
-            if (r.getDays() > 3) {
-                thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
+            if (rental.getDays() > 3) {
+                thisAmount = ((rental.getDays() - 3) * 1.5) + thisAmount;
             }
         }
         return thisAmount;
