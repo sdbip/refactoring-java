@@ -1,5 +1,7 @@
 package rentals;
 
+import java.util.stream.Stream;
+
 import static rentals.MovieType.newRelease;
 
 class FrequentEnterPointsCalculator {
@@ -9,12 +11,11 @@ class FrequentEnterPointsCalculator {
         this.movieRepository = movieRepository;
     }
 
-    int getPoints(Iterable<MovieRental> rentals) {
-        int frequentEnterPoints = 0;
-        for (MovieRental r : rentals) {
-            frequentEnterPoints++;
+    int getPoints(Stream<MovieRental> rentals) {
+        return rentals.map(r -> {
+            int frequentEnterPoints = 1;
             if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease && r.getDays() > 2) frequentEnterPoints++;
-        }
-        return frequentEnterPoints;
+            return frequentEnterPoints;
+        }).reduce(0, Integer::sum);
     }
 }

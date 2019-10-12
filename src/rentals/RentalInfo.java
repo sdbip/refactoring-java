@@ -11,7 +11,7 @@ public class RentalInfo {
   }
 
   public String statement(Customer customer) {
-    int frequentEnterPoints = new FrequentEnterPointsCalculator(movieRepository).getPoints(customer.getRentals());
+    int frequentEnterPoints = new FrequentEnterPointsCalculator(movieRepository).getPoints(customer.getRentals().stream());
     StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n");
     for (MovieRental r : customer.getRentals()) {
       final double thisAmount = priceCalculator.getPrice(r);

@@ -42,7 +42,7 @@ class FrequentEnterPointsCalculatorTests {
     }
 
     private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final List<MovieRental> rentals = Collections.singletonList(new MovieRental("", daysRented));
+        final Stream<MovieRental> rentals = Stream.of(new MovieRental("", daysRented));
         return dynamicTest(Integer.toString(daysRented), () ->
                 assertEquals(1, calculator.getPoints(rentals)));
     }
@@ -50,7 +50,7 @@ class FrequentEnterPointsCalculatorTests {
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
         mockRepository.type = MovieType.newRelease;
-        final List<MovieRental> rentals = Collections.singletonList(new MovieRental("", 10));
+        final Stream<MovieRental> rentals = Stream.of(new MovieRental("", 10));
         assertEquals(2, calculator.getPoints(rentals));
     }
 
