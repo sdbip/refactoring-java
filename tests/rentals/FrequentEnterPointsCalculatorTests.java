@@ -13,56 +13,37 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 class FrequentEnterPointsCalculatorTests {
 
     private FrequentEnterPointsCalculator calculator;
-    private MockRepository mockRepository;
 
     @BeforeEach
     void setup() {
-        mockRepository = new MockRepository();
-        calculator = new FrequentEnterPointsCalculator(mockRepository);
+        calculator = new FrequentEnterPointsCalculator();
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForRegularRentalRegardlessOfTime() {
-        mockRepository.type = MovieType.regular;
-        return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
+        return Stream.of(1, 2, 10).map(days -> assertOnePointRewardedForSingleRental(MovieType.regular, days));
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForChildrensRentalsRegardlessOfTime() {
-        mockRepository.type = MovieType.forChildren;
-        return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
+        return Stream.of(1, 2, 10).map(days -> assertOnePointRewardedForSingleRental(MovieType.forChildren, days));
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForNewReleasesUpToTwoDays() {
-        mockRepository.type = MovieType.newRelease;
-        return Stream.of(1, 2).map(this::assertOnePointRewardedForSingleRental);
+        return Stream.of(1, 2).map(days -> assertOnePointRewardedForSingleRental(MovieType.newRelease, days));
     }
 
-    private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(mockRepository.typeOfMovie(""), daysRented));
-        return dynamicTest(Integer.toString(daysRented), () ->
-                assertEquals(1, calculator.getPoints(rentals)));
+    private DynamicTest assertOnePointRewardedForSingleRental(MovieType typeOfMovie, int daysRented) {
+        return dynamicTest(Integer.toString(daysRented), () -> {
+            final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(typeOfMovie, daysRented));
+            assertEquals(1, calculator.getPoints(rentals));
+        });
     }
 
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
-        mockRepository.type = MovieType.newRelease;
-        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(mockRepository.typeOfMovie(""), 10));
+        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(MovieType.newRelease, 10));
         assertEquals(2, calculator.getPoints(rentals));
-    }
-
-    private static class MockRepository implements MovieRepository {
-        private MovieType type;
-
-        @Override
-        public MovieType typeOfMovie(String id) {
-            return type;
-        }
-
-        @Override
-        public String titleOfMovie(String id) {
-            return null;
-        }
     }
 }

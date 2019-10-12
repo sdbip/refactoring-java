@@ -5,12 +5,6 @@ import java.util.stream.Stream;
 import static rentals.MovieType.newRelease;
 
 class FrequentEnterPointsCalculator {
-    private MovieRepository movieRepository;
-
-    FrequentEnterPointsCalculator(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
-
     int getPoints(Stream<MovieRental2> rentals) {
         return rentals.map(r -> {
             final MovieType typeOfMovie = r.getTypeOfMovie();
