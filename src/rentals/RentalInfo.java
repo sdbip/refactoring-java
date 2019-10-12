@@ -15,24 +15,7 @@ public class RentalInfo {
     int frequentEnterPoints = 0;
     StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n");
     for (MovieRental r : customer.getRentals()) {
-      double thisAmount = 0;
-
-      // determine amount for each movie
-      if (movieRepository.typeOfMovie(r.getMovieId()) == regular) {
-        thisAmount = 2;
-        if (r.getDays() > 2) {
-          thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
-        }
-      }
-      if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease) {
-        thisAmount = r.getDays() * 3;
-      }
-      if (movieRepository.typeOfMovie(r.getMovieId()) == forChildren) {
-        thisAmount = 1.5;
-        if (r.getDays() > 3) {
-          thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
-        }
-      }
+      double thisAmount = getThisAmount(r);
 
       //add frequent bonus points
       frequentEnterPoints++;
@@ -48,5 +31,27 @@ public class RentalInfo {
     result.append("You earned ").append(frequentEnterPoints).append(" frequent points\n");
 
     return result.toString();
+  }
+
+  private double getThisAmount(MovieRental r) {
+    double thisAmount = 0;
+
+    // determine amount for each movie
+    if (movieRepository.typeOfMovie(r.getMovieId()) == regular) {
+      thisAmount = 2;
+      if (r.getDays() > 2) {
+        thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
+      }
+    }
+    if (movieRepository.typeOfMovie(r.getMovieId()) == newRelease) {
+      thisAmount = r.getDays() * 3;
+    }
+    if (movieRepository.typeOfMovie(r.getMovieId()) == forChildren) {
+      thisAmount = 1.5;
+      if (r.getDays() > 3) {
+        thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
+      }
+    }
+    return thisAmount;
   }
 }
