@@ -1,5 +1,7 @@
 package rentals;
 
+import java.util.stream.Stream;
+
 class PriceCalculator {
     private final MovieRepository repository;
 
@@ -7,13 +9,9 @@ class PriceCalculator {
         this.repository = repository;
     }
 
-    double getTotalPrice(Iterable<MovieRental> rentals) {
-        double totalAmount = 0;
-        for (MovieRental r : rentals) {
-            double thisAmount = getPrice(r);
-            totalAmount = totalAmount + thisAmount;
-        }
-        return totalAmount;
+    double getTotalPrice(Stream<MovieRental> rentals) {
+        return rentals.map(this::getPrice)
+                .reduce(0.0, Double::sum);
     }
 
     double getPrice(MovieRental rental) {
