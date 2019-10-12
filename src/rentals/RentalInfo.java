@@ -1,15 +1,9 @@
 package rentals;
 
-import java.util.HashMap;
-
 public class RentalInfo {
 
   public String statement(Customer customer) {
-    HashMap<String, Movie> movies = new HashMap<>();
-    movies.put("F001", new Movie("You've Got Mail", "regular"));
-    movies.put("F002", new Movie("Matrix", "regular"));
-    movies.put("F003", new Movie("Cars", "childrens"));
-    movies.put("F004", new Movie("Fast & Furious X", "new"));
+    HardCodedMovieRepository movieRepository = new HardCodedMovieRepository();
 
     double totalAmount = 0;
     int frequentEnterPoints = 0;
@@ -18,16 +12,16 @@ public class RentalInfo {
       double thisAmount = 0;
 
       // determine amount for each movie
-      if (movies.get(r.getMovieId()).getCode().equals("regular")) {
+      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("regular")) {
         thisAmount = 2;
         if (r.getDays() > 2) {
           thisAmount = ((r.getDays() - 2) * 1.5) + thisAmount;
         }
       }
-      if (movies.get(r.getMovieId()).getCode().equals("new")) {
+      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("new")) {
         thisAmount = r.getDays() * 3;
       }
-      if (movies.get(r.getMovieId()).getCode().equals("childrens")) {
+      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("childrens")) {
         thisAmount = 1.5;
         if (r.getDays() > 3) {
           thisAmount = ((r.getDays() - 3) * 1.5) + thisAmount;
@@ -37,10 +31,10 @@ public class RentalInfo {
       //add frequent bonus points
       frequentEnterPoints++;
       // add bonus for a two day new release rental
-      if (movies.get(r.getMovieId()).getCode().equals("new") && r.getDays() > 2) frequentEnterPoints++;
+      if (movieRepository.movies.get(r.getMovieId()).getCode().equals("new") && r.getDays() > 2) frequentEnterPoints++;
 
       //print figures for this rental
-      result.append("\t").append(movies.get(r.getMovieId()).getTitle()).append("\t").append(thisAmount).append("\n");
+      result.append("\t").append(movieRepository.movies.get(r.getMovieId()).getTitle()).append("\t").append(thisAmount).append("\n");
       totalAmount = totalAmount + thisAmount;
     }
     // add footer lines
