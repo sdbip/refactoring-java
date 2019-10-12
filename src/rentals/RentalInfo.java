@@ -13,7 +13,6 @@ public class RentalInfo {
   }
 
   public String statement(Customer customer) {
-    double totalAmount = 0;
     int frequentEnterPoints = 0;
     StringBuilder result = new StringBuilder("Rental Record for " + customer.getName() + "\n");
     for (MovieRental r : customer.getRentals()) {
@@ -26,9 +25,9 @@ public class RentalInfo {
 
       //print figures for this rental
       result.append("\t").append(movieRepository.titleOfMovie(r.getMovieId())).append("\t").append(thisAmount).append("\n");
-      totalAmount = totalAmount + thisAmount;
     }
     // add footer lines
+    double totalAmount = priceCalculator.getTotalPrice(customer.getRentals());
     result.append("Amount owed is ").append(totalAmount).append("\n");
     result.append("You earned ").append(frequentEnterPoints).append(" frequent points\n");
 
