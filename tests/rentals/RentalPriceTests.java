@@ -43,6 +43,27 @@ class RentalPriceTests {
                 });
     }
 
+    @TestFactory
+    Stream<DynamicTest> forChildrenRentalPricesHaveNotChanged() {
+        final Map<Integer, Double> expectedPricesByDaysOfRental = Map.of(
+                1, 1.5,
+                2, 1.5,
+                3, 1.5,
+                4, 3.0,
+                10, 12.0);
+        return expectedPricesByDaysOfRental.entrySet().stream()
+                .map(entry -> {
+                    final int days = entry.getKey();
+                    return dynamicTest(Integer.toString(days), () -> {
+                        mockRepository.types.put("this id", MovieType.forChildren);
+
+                        final double actualPrice = calculator.getPrice(new MovieRental("this id", days));
+
+                        assertEquals(entry.getValue(), actualPrice);
+                    });
+                });
+    }
+
     private static class MockRepository implements MovieRepository {
         private HashMap<String, MovieType> types = new HashMap<>();
 
