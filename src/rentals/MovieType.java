@@ -1,5 +1,5 @@
 package rentals;
 
-enum MovieType {
+public enum MovieType {
     regular, forChildren, newRelease
 }

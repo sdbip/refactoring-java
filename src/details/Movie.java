@@ -1,4 +1,4 @@
-package rentals;
+package details;
 
 class Movie {
     private final String title;

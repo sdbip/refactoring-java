@@ -1,5 +1,7 @@
 package rentals;
 
+import details.HardCodedMovieRepository;
+
 import static rentals.MovieType.*;
 
 public class RentalInfo {

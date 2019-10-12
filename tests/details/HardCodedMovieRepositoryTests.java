@@ -1,8 +1,9 @@
-package rentals;
+package details;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
+import rentals.MovieType;
 
 import java.util.Map;
 import java.util.stream.Stream;

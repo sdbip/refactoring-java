@@ -1,11 +1,14 @@
-package rentals;
+package details;
+
+import rentals.MovieRepository;
+import rentals.MovieType;
 
 import java.util.HashMap;
 
-class HardCodedMovieRepository implements MovieRepository {
+public class HardCodedMovieRepository implements MovieRepository {
     private final HashMap<String, Movie> movies = new HashMap<>();
 
-    HardCodedMovieRepository() {
+    public HardCodedMovieRepository() {
         movies.put("F001", new Movie("You've Got Mail", "regular"));
         movies.put("F002", new Movie("Matrix", "regular"));
         movies.put("F003", new Movie("Cars", "childrens"));
