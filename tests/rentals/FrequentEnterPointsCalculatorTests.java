@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,7 +40,7 @@ class FrequentEnterPointsCalculatorTests {
     }
 
     private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final Stream<MovieRental> rentals = Stream.of(new MovieRental("", daysRented));
+        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(mockRepository.typeOfMovie(""), daysRented));
         return dynamicTest(Integer.toString(daysRented), () ->
                 assertEquals(1, calculator.getPoints(rentals)));
     }
@@ -50,7 +48,7 @@ class FrequentEnterPointsCalculatorTests {
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
         mockRepository.type = MovieType.newRelease;
-        final Stream<MovieRental> rentals = Stream.of(new MovieRental("", 10));
+        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(mockRepository.typeOfMovie(""), 10));
         assertEquals(2, calculator.getPoints(rentals));
     }
 

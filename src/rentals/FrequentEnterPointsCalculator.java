@@ -11,10 +11,10 @@ class FrequentEnterPointsCalculator {
         this.movieRepository = movieRepository;
     }
 
-    int getPoints(Stream<MovieRental> rentals) {
+    int getPoints(Stream<MovieRental2> rentals) {
         return rentals.map(r -> {
-            final MovieType typeOfMovie = movieRepository.typeOfMovie(r.getMovieId());
-            final int daysRented = r.getDays();
+            final MovieType typeOfMovie = r.getTypeOfMovie();
+            final int daysRented = r.getDaysRented();
             return typeOfMovie == newRelease && daysRented > 2 ? 2 : 1;
         }).reduce(0, Integer::sum);
     }
