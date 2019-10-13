@@ -29,10 +29,6 @@ public final class Movie {
         return title;
     }
 
-    public MovieType getType() {
-        return type;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
