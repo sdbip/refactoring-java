@@ -19,7 +19,7 @@ class AcceptanceTests {
                 new MovieRental("F002", 1));
 
         final String result = new RentalInfo(new HardCodedMovieRepository()).statement(
-                new Customer("C. U. Stomer", rentals));
+                new Customer("C. U. Stomer"), rentals);
 
         final String expected = "Rental Record for C. U. Stomer\n" +
                 "\tYou've Got Mail\t3.5\n" +
