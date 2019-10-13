@@ -61,6 +61,11 @@ class FrequentRenterPointsCalculatorTests {
         }
 
         @Override
+        public Movie getMovie(String id) {
+            return new Movie(null, type);
+        }
+
+        @Override
         public String titleOfMovie(String id) {
             return null;
         }

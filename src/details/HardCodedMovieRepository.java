@@ -20,13 +20,18 @@ public class HardCodedMovieRepository implements MovieRepository {
 
     @Override
     public MovieType typeOfMovie(String id) {
-        final Movie movie = movies.get(id);
+        final Movie movie = getMovie(id);
         return movie.getType();
     }
 
     @Override
+    public Movie getMovie(String id) {
+        return movies.get(id);
+    }
+
+    @Override
     public String titleOfMovie(String id) {
-        final Movie movie = movies.get(id);
+        final Movie movie = getMovie(id);
         return movie.getTitle();
     }
 }
