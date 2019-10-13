@@ -1,4 +1,4 @@
-package rentals;
+package details;
 
 public final class MovieRental {
     final String movieId;

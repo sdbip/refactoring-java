@@ -1,7 +1,7 @@
 import details.HardCodedMovieRepository;
-import rentals.Customer;
-import rentals.MovieRental;
-import rentals.RentalInfo;
+import details.Customer;
+import details.MovieRental;
+import details.RentalInfo;
 
 import java.util.Arrays;
 

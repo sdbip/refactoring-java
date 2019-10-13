@@ -1,4 +1,6 @@
-package rentals;
+package details;
+
+import details.Customer;
 
 /**
  * Warning not thread-safe.

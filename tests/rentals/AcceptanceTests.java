@@ -1,6 +1,9 @@
 package rentals;
 
+import details.Customer;
 import details.HardCodedMovieRepository;
+import details.MovieRental;
+import details.RentalInfo;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

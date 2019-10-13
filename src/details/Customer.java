@@ -1,4 +1,4 @@
-package rentals;
+package details;
 
 import java.util.List;
 
