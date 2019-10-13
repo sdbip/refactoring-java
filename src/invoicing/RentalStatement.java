@@ -1,7 +1,5 @@
 package invoicing;
 
-import invoicing.Customer;
-
 /**
  * Warning not thread-safe.
  */
@@ -52,15 +50,5 @@ public class RentalStatement {
         resultBuilder.append("You earned ")
                 .append(points)
                 .append(" frequent points\n");
-    }
-
-    public static class LineItem {
-        final String title;
-        final double amount;
-
-        public LineItem(String title, double amount) {
-            this.title = title;
-            this.amount = amount;
-        }
     }
 }

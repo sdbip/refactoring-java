@@ -1,6 +1,7 @@
 package details;
 
 import invoicing.Customer;
+import invoicing.LineItem;
 import invoicing.RentalStatement;
 import rentals.*;
 import rentals.MovieRental;
@@ -18,8 +19,8 @@ public class RentalInfo {
     }
 
     public String statement(Customer customer, List<details.MovieRental> rentals) {
-        final Stream<RentalStatement.LineItem> lineItems =
-                streamRentals(rentals).map(r -> new RentalStatement.LineItem(
+        final Stream<LineItem> lineItems =
+                streamRentals(rentals).map(r -> new LineItem(
                         r.getMovieTitle(),
                         r.getPrice())
                 );
