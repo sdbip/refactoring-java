@@ -17,6 +17,14 @@ public final class Movie {
         return id;
     }
 
+    double getRentalPrice(int daysRented) {
+        return type.getPrice(daysRented);
+    }
+
+    int getFrequentRenterPoints(int daysRented) {
+        return type.getFrequentRenterPoints(daysRented);
+    }
+
     public String getTitle() {
         return title;
     }

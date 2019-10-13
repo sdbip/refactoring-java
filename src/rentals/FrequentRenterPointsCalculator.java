@@ -15,8 +15,6 @@ class FrequentRenterPointsCalculator {
 
     private int getPoints(MovieRental rental) {
         final Movie movie = movieRepository.getMovie(rental.getMovieId());
-        final MovieType typeOfMovie = movie.getType();
-        final int daysRented = rental.getDays();
-        return typeOfMovie.getFrequentRenterPoints(daysRented);
+        return movie.getFrequentRenterPoints(rental.getDays());
     }
 }
