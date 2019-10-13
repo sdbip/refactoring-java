@@ -8,4 +8,12 @@ public final class MovieRental {
         this.movie = movie;
         this.days = days;
     }
+
+    public double getPrice() {
+        return movie.getRentalPrice(days);
+    }
+
+    public int getFrequentRenterPoints() {
+        return movie.getFrequentRenterPoints(days);
+    }
 }
