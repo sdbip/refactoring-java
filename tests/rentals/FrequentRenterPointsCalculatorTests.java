@@ -10,15 +10,15 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-class FrequentEnterPointsCalculatorTests {
+class FrequentRenterPointsCalculatorTests {
 
-    private FrequentEnterPointsCalculator calculator;
+    private FrequentRenterPointsCalculator calculator;
     private MockRepository mockRepository;
 
     @BeforeEach
     void setup() {
         mockRepository = new MockRepository();
-        calculator = new FrequentEnterPointsCalculator(mockRepository);
+        calculator = new FrequentRenterPointsCalculator(mockRepository);
     }
 
     @TestFactory

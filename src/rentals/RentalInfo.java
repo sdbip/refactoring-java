@@ -6,12 +6,12 @@ public class RentalInfo {
 
     private final MovieRepository movieRepository;
     private final PriceCalculator priceCalculator;
-    private final FrequentEnterPointsCalculator frequentEnterPointsCalculator;
+    private final FrequentRenterPointsCalculator frequentRenterPointsCalculator;
 
     public RentalInfo(final MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
         priceCalculator = new PriceCalculator(movieRepository);
-        frequentEnterPointsCalculator = new FrequentEnterPointsCalculator(movieRepository);
+        frequentRenterPointsCalculator = new FrequentRenterPointsCalculator(movieRepository);
     }
 
     public String statement(Customer customer) {
@@ -21,8 +21,8 @@ public class RentalInfo {
                         priceCalculator.getPrice(r))
                 );
         final double totalAmount = priceCalculator.getTotalPrice(customer.getRentals().stream());
-        final int frequentEnterPoints = frequentEnterPointsCalculator.getPoints(customer.getRentals().stream());
-        final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentEnterPoints, lineItems::iterator);
+        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(customer.getRentals().stream());
+        final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
         return reportFormatter.statement();
     }
 }

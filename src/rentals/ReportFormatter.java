@@ -7,13 +7,13 @@ class ReportFormatter {
     private StringBuilder resultBuilder;
     private final Customer customer;
     private final double totalAmount;
-    private final int frequentEnterPoints;
+    private final int frequentRenterPoints;
     private final Iterable<LineItem> lineItems;
 
-    ReportFormatter(Customer customer, double totalAmount, int frequentEnterPoints, Iterable<LineItem> lineItems) {
+    ReportFormatter(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
         this.customer = customer;
         this.totalAmount = totalAmount;
-        this.frequentEnterPoints = frequentEnterPoints;
+        this.frequentRenterPoints = frequentRenterPoints;
         this.lineItems = lineItems;
     }
 
@@ -22,7 +22,7 @@ class ReportFormatter {
         for (LineItem lineItem : lineItems) {
             addFiguresForRental(lineItem);
         }
-        addFooterLines(totalAmount, frequentEnterPoints);
+        addFooterLines(totalAmount, frequentRenterPoints);
         return resultBuilder.toString();
     }
 
@@ -34,9 +34,9 @@ class ReportFormatter {
                 .append("\n");
     }
 
-    private void addFooterLines(double totalAmount, int frequentEnterPoints) {
+    private void addFooterLines(double totalAmount, int frequentRenterPoints) {
         appendAmountOwed(totalAmount);
-        appendFrequentEnterPoints(frequentEnterPoints);
+        appendFrequentRenterPoints(frequentRenterPoints);
     }
 
     private void appendAmountOwed(double totalAmount) {
@@ -45,9 +45,9 @@ class ReportFormatter {
                 .append("\n");
     }
 
-    private void appendFrequentEnterPoints(int frequentEnterPoints) {
+    private void appendFrequentRenterPoints(int points) {
         resultBuilder.append("You earned ")
-                .append(frequentEnterPoints)
+                .append(points)
                 .append(" frequent points\n");
     }
 

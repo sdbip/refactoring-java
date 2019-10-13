@@ -2,10 +2,10 @@ package rentals;
 
 import java.util.stream.Stream;
 
-class FrequentEnterPointsCalculator {
+class FrequentRenterPointsCalculator {
     private final MovieRepository movieRepository;
 
-    FrequentEnterPointsCalculator(MovieRepository movieRepository) {
+    FrequentRenterPointsCalculator(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
@@ -16,6 +16,6 @@ class FrequentEnterPointsCalculator {
     private Integer getPoints(MovieRental rental) {
         final MovieType typeOfMovie = movieRepository.typeOfMovie(rental.getMovieId());
         final int daysRented = rental.getDays();
-        return typeOfMovie.getFrequentEnterPoints(daysRented);
+        return typeOfMovie.getFrequentRenterPoints(daysRented);
     }
 }
