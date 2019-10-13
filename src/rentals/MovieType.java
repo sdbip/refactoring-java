@@ -30,7 +30,16 @@ public enum MovieType {
         double getPrice(int daysRented) {
             return FEE_PER_DAY * daysRented;
         }
+
+        @Override
+        int getFrequentEnterPoints(int daysRented) {
+            return daysRented > 2 ? 2 : 1;
+        }
     };
 
     abstract double getPrice(int daysRented);
+
+    int getFrequentEnterPoints(int daysRented) {
+        return 1;
+    }
 }
