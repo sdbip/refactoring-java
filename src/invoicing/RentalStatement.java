@@ -10,7 +10,7 @@ public class RentalStatement {
     private final int frequentRenterPoints;
     private final Iterable<LineItem> lineItems;
 
-    public RentalStatement(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
+    RentalStatement(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
         this.customer = customer;
         this.totalAmount = totalAmount;
         this.frequentRenterPoints = frequentRenterPoints;
