@@ -24,7 +24,7 @@ public class HardCodedMovieRepository implements MovieRepository {
     }
 
     @Override
-    public Movie getMovie(String id) {
+    public Movie get(String id) {
         return movies.get(id);
     }
 }
