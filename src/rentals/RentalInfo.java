@@ -16,12 +16,12 @@ public class RentalInfo {
 
     public String statement(Customer customer) {
         final Stream<ReportFormatter.LineItem> lineItems =
-                customer.getRentals().stream().map(r -> new ReportFormatter.LineItem(
+                customer.rentals.stream().map(r -> new ReportFormatter.LineItem(
                         movieRepository.get(r.getMovieId()).getTitle(),
                         priceCalculator.getPrice(r))
                 );
-        final double totalAmount = priceCalculator.getTotalPrice(customer.getRentals().stream());
-        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(customer.getRentals().stream());
+        final double totalAmount = priceCalculator.getTotalPrice(customer.rentals.stream());
+        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(customer.rentals.stream());
         final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
         return reportFormatter.statement();
     }

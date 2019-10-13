@@ -18,7 +18,7 @@ class ReportFormatter {
     }
 
     String statement() {
-        resultBuilder = new StringBuilder("Rental Record for " + customer.getName() + "\n");
+        resultBuilder = new StringBuilder("Rental Record for " + customer.name + "\n");
         for (LineItem lineItem : lineItems) {
             addFiguresForRental(lineItem);
         }
