@@ -9,41 +9,47 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 import static rentals.MovieType.*;
+import static rentals.MovieType.regular;
 
 class FrequentRenterPointsCalculatorTests {
-    private MovieType typeOfRentedMovie;
+    private Movie rentedMovie;
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForRegularRentalRegardlessOfTime() {
-        typeOfRentedMovie = regular;
+        givenRentedMovieOfType(regular);
         return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForChildrensRentalsRegardlessOfTime() {
-        typeOfRentedMovie = forChildren;
+        givenRentedMovieOfType(forChildren);
         return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForNewReleasesUpToTwoDays() {
-        typeOfRentedMovie = newRelease;
+        givenRentedMovieOfType(newRelease);
         return Stream.of(1, 2).map(this::assertOnePointRewardedForSingleRental);
     }
 
     private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final MovieRental rental = new MovieRental(movieWithType(typeOfRentedMovie), daysRented);
+        final MovieRental rental = rentalForDays(daysRented);
         return dynamicTest(Integer.toString(daysRented), () ->
                 assertEquals(1, rental.getFrequentRenterPoints()));
     }
 
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
-        final MovieRental rental = new MovieRental(movieWithType(newRelease), 10);
+        givenRentedMovieOfType(newRelease);
+        final MovieRental rental = rentalForDays(10);
         assertEquals(2, rental.getFrequentRenterPoints());
     }
 
-    private Movie movieWithType(MovieType type) {
-        return new Movie("and id", "a " + type + " movie", type);
+    private void givenRentedMovieOfType(MovieType regular) {
+        rentedMovie = new Movie("and id", "a " + regular + " movie", regular);
+    }
+
+    private MovieRental rentalForDays(Integer daysRented) {
+        return new MovieRental(rentedMovie, daysRented);
     }
 }
