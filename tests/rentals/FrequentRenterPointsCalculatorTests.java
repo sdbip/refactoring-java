@@ -34,14 +34,14 @@ class FrequentRenterPointsCalculatorTests {
     }
 
     private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(movieWithType(typeOfRentedMovies), daysRented));
+        final Stream<MovieRental> rentals = Stream.of(new MovieRental(movieWithType(typeOfRentedMovies), daysRented));
         return dynamicTest(Integer.toString(daysRented), () ->
                 assertEquals(1, calculator.getPoints(rentals)));
     }
 
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
-        final Stream<MovieRental2> rentals = Stream.of(new MovieRental2(movieWithType(newRelease), 10));
+        final Stream<MovieRental> rentals = Stream.of(new MovieRental(movieWithType(newRelease), 10));
         assertEquals(2, calculator.getPoints(rentals));
     }
 

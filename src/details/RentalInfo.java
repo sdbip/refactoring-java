@@ -1,6 +1,7 @@
 package details;
 
 import rentals.*;
+import rentals.MovieRental;
 
 import java.util.stream.Stream;
 
@@ -28,8 +29,8 @@ public class RentalInfo {
         return reportFormatter.statement();
     }
 
-    private Stream<MovieRental2> streamRentals(Customer customer) {
+    private Stream<MovieRental> streamRentals(Customer customer) {
         return customer.rentals.stream()
-                    .map(r -> new MovieRental2(movieRepository.get(r.movieId), r.days));
+                    .map(r -> new MovieRental(movieRepository.get(r.movieId), r.days));
     }
 }
