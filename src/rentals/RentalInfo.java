@@ -17,7 +17,7 @@ public class RentalInfo {
     public String statement(Customer customer) {
         final Stream<ReportFormatter.LineItem> lineItems =
                 customer.rentals.stream().map(r -> new ReportFormatter.LineItem(
-                        movieRepository.get(r.getMovieId()).getTitle(),
+                        movieRepository.get(r.movieId).getTitle(),
                         priceCalculator.getPrice(r))
                 );
         final double totalAmount = priceCalculator.getTotalPrice(customer.rentals.stream());

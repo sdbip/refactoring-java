@@ -2,7 +2,7 @@ package rentals;
 
 import java.util.List;
 
-public class Customer {
+public final class Customer {
     final String name;
     final List<MovieRental> rentals;
 

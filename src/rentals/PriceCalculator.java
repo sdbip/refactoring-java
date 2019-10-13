@@ -15,7 +15,7 @@ class PriceCalculator {
     }
 
     double getPrice(MovieRental rental) {
-        final Movie movie = repository.get(rental.getMovieId());
-        return movie.getRentalPrice(rental.getDays());
+        final Movie movie = repository.get(rental.movieId);
+        return movie.getRentalPrice(rental.days);
     }
 }
