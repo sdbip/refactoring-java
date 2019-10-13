@@ -56,18 +56,9 @@ class FrequentRenterPointsCalculatorTests {
         private MovieType type;
 
         @Override
-        public MovieType typeOfMovie(String id) {
-            return type;
-        }
-
-        @Override
         public Movie getMovie(String id) {
             return new Movie(null, type);
         }
 
-        @Override
-        public String titleOfMovie(String id) {
-            return null;
-        }
     }
 }
