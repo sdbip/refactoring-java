@@ -5,21 +5,22 @@ import invoicing.Customer;
 /**
  * Warning not thread-safe.
  */
-public class ReportFormatter {
+public class RentalStatement {
     private StringBuilder resultBuilder;
     private final Customer customer;
     private final double totalAmount;
     private final int frequentRenterPoints;
     private final Iterable<LineItem> lineItems;
 
-    public ReportFormatter(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
+    public RentalStatement(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
         this.customer = customer;
         this.totalAmount = totalAmount;
         this.frequentRenterPoints = frequentRenterPoints;
         this.lineItems = lineItems;
     }
 
-    public String statement() {
+    @Override
+    public String toString() {
         resultBuilder = new StringBuilder("Rental Record for " + customer.name + "\n");
         for (LineItem lineItem : lineItems) {
             addFiguresForRental(lineItem);

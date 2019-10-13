@@ -1,7 +1,7 @@
 package details;
 
 import invoicing.Customer;
-import invoicing.ReportFormatter;
+import invoicing.RentalStatement;
 import rentals.*;
 import rentals.MovieRental;
 
@@ -18,8 +18,8 @@ public class RentalInfo {
     }
 
     public String statement(Customer customer, List<details.MovieRental> rentals) {
-        final Stream<ReportFormatter.LineItem> lineItems =
-                streamRentals(rentals).map(r -> new ReportFormatter.LineItem(
+        final Stream<RentalStatement.LineItem> lineItems =
+                streamRentals(rentals).map(r -> new RentalStatement.LineItem(
                         r.getMovieTitle(),
                         r.getPrice())
                 );
@@ -29,8 +29,8 @@ public class RentalInfo {
         final int frequentRenterPoints = streamRentals(rentals)
                 .map(MovieRental::getFrequentRenterPoints)
                 .reduce(0, Integer::sum);
-        final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
-        return reportFormatter.statement();
+        final RentalStatement rentalStatement = new RentalStatement(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
+        return rentalStatement.toString();
     }
 
     private Stream<MovieRental> streamRentals(Collection<details.MovieRental> rentals) {
