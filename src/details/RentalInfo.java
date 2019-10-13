@@ -16,7 +16,7 @@ public class RentalInfo {
     public String statement(Customer customer) {
         final Stream<ReportFormatter.LineItem> lineItems =
                 streamRentals(customer).map(r -> new ReportFormatter.LineItem(
-                        r.movie.getTitle(),
+                        r.getMovieTitle(),
                         r.getPrice())
                 );
         final double totalAmount = streamRentals(customer)

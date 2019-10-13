@@ -1,12 +1,18 @@
 package rentals;
 
+import java.util.Objects;
+
 public final class MovieRental {
-    public final Movie movie;
-    final int days;
+    private final Movie movie;
+    private final int days;
 
     public MovieRental(Movie movie, int days) {
         this.movie = movie;
         this.days = days;
+    }
+
+    public String getMovieTitle() {
+        return movie.getTitle();
     }
 
     public double getPrice() {
@@ -15,5 +21,19 @@ public final class MovieRental {
 
     public int getFrequentRenterPoints() {
         return movie.getFrequentRenterPoints(days);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MovieRental)) return false;
+        MovieRental other = (MovieRental) o;
+        return days == other.days &&
+                movie.equals(other.movie);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movie, days);
     }
 }
