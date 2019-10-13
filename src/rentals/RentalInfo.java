@@ -10,19 +10,24 @@ public class RentalInfo {
 
     public RentalInfo(final MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-        priceCalculator = new PriceCalculator(movieRepository);
-        frequentRenterPointsCalculator = new FrequentRenterPointsCalculator(movieRepository);
+        priceCalculator = new PriceCalculator();
+        frequentRenterPointsCalculator = new FrequentRenterPointsCalculator();
     }
 
     public String statement(Customer customer) {
         final Stream<ReportFormatter.LineItem> lineItems =
-                customer.rentals.stream().map(r -> new ReportFormatter.LineItem(
-                        movieRepository.get(r.movieId).getTitle(),
+                streamRentals(customer).map(r -> new ReportFormatter.LineItem(
+                        r.movie.getTitle(),
                         priceCalculator.getPrice(r))
                 );
-        final double totalAmount = priceCalculator.getTotalPrice(customer.rentals.stream());
-        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(customer.rentals.stream());
+        final double totalAmount = priceCalculator.getTotalPrice(streamRentals(customer));
+        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(streamRentals(customer));
         final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
         return reportFormatter.statement();
+    }
+
+    private Stream<MovieRental2> streamRentals(Customer customer) {
+        return customer.rentals.stream()
+                    .map(r -> new MovieRental2(movieRepository.get(r.movieId), r.days));
     }
 }
