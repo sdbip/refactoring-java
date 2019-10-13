@@ -8,13 +8,9 @@ import java.util.stream.Stream;
 public class RentalInfo {
 
     private final MovieRepository movieRepository;
-    private final PriceCalculator priceCalculator;
-    private final FrequentRenterPointsCalculator frequentRenterPointsCalculator;
 
     public RentalInfo(final MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-        priceCalculator = new PriceCalculator();
-        frequentRenterPointsCalculator = new FrequentRenterPointsCalculator();
     }
 
     public String statement(Customer customer) {
@@ -23,8 +19,12 @@ public class RentalInfo {
                         r.movie.getTitle(),
                         r.getPrice())
                 );
-        final double totalAmount = priceCalculator.getTotalPrice(streamRentals(customer));
-        final int frequentRenterPoints = frequentRenterPointsCalculator.getPoints(streamRentals(customer));
+        final double totalAmount = streamRentals(customer)
+                .map(MovieRental::getPrice)
+                .reduce(0.0, Double::sum);
+        final int frequentRenterPoints = streamRentals(customer)
+                .map(MovieRental::getFrequentRenterPoints)
+                .reduce(0, Integer::sum);
         final ReportFormatter reportFormatter = new ReportFormatter(customer, totalAmount, frequentRenterPoints, lineItems::iterator);
         return reportFormatter.statement();
     }

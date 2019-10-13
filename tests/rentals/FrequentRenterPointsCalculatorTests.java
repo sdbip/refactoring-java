@@ -11,38 +11,36 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 import static rentals.MovieType.*;
 
 class FrequentRenterPointsCalculatorTests {
-
-    private FrequentRenterPointsCalculator calculator = new FrequentRenterPointsCalculator();
-    private MovieType typeOfRentedMovies;
+    private MovieType typeOfRentedMovie;
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForRegularRentalRegardlessOfTime() {
-        typeOfRentedMovies = regular;
+        typeOfRentedMovie = regular;
         return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForChildrensRentalsRegardlessOfTime() {
-        typeOfRentedMovies = forChildren;
+        typeOfRentedMovie = forChildren;
         return Stream.of(1, 2, 10).map(this::assertOnePointRewardedForSingleRental);
     }
 
     @TestFactory
     Stream<DynamicTest> rewardsOnePointForNewReleasesUpToTwoDays() {
-        typeOfRentedMovies = newRelease;
+        typeOfRentedMovie = newRelease;
         return Stream.of(1, 2).map(this::assertOnePointRewardedForSingleRental);
     }
 
     private DynamicTest assertOnePointRewardedForSingleRental(Integer daysRented) {
-        final Stream<MovieRental> rentals = Stream.of(new MovieRental(movieWithType(typeOfRentedMovies), daysRented));
+        final MovieRental rental = new MovieRental(movieWithType(typeOfRentedMovie), daysRented);
         return dynamicTest(Integer.toString(daysRented), () ->
-                assertEquals(1, calculator.getPoints(rentals)));
+                assertEquals(1, rental.getFrequentRenterPoints()));
     }
 
     @Test
     void rewardsTwoPointForNewReleasesIfRentedMoreThanTwoDays() {
-        final Stream<MovieRental> rentals = Stream.of(new MovieRental(movieWithType(newRelease), 10));
-        assertEquals(2, calculator.getPoints(rentals));
+        final MovieRental rental = new MovieRental(movieWithType(newRelease), 10);
+        assertEquals(2, rental.getFrequentRenterPoints());
     }
 
     private Movie movieWithType(MovieType type) {
