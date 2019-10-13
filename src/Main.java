@@ -1,5 +1,5 @@
 import details.HardCodedMovieRepository;
-import details.Customer;
+import invoicing.Customer;
 import details.MovieRental;
 import details.RentalInfo;
 

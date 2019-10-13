@@ -1,6 +1,6 @@
 package rentals;
 
-import details.Customer;
+import invoicing.Customer;
 import details.HardCodedMovieRepository;
 import details.MovieRental;
 import details.RentalInfo;

@@ -1,4 +1,4 @@
-package details;
+package invoicing;
 
 public final class Customer {
     final String name;

@@ -1,25 +1,25 @@
-package details;
+package invoicing;
 
-import details.Customer;
+import invoicing.Customer;
 
 /**
  * Warning not thread-safe.
  */
-class ReportFormatter {
+public class ReportFormatter {
     private StringBuilder resultBuilder;
     private final Customer customer;
     private final double totalAmount;
     private final int frequentRenterPoints;
     private final Iterable<LineItem> lineItems;
 
-    ReportFormatter(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
+    public ReportFormatter(Customer customer, double totalAmount, int frequentRenterPoints, Iterable<LineItem> lineItems) {
         this.customer = customer;
         this.totalAmount = totalAmount;
         this.frequentRenterPoints = frequentRenterPoints;
         this.lineItems = lineItems;
     }
 
-    String statement() {
+    public String statement() {
         resultBuilder = new StringBuilder("Rental Record for " + customer.name + "\n");
         for (LineItem lineItem : lineItems) {
             addFiguresForRental(lineItem);
@@ -53,11 +53,11 @@ class ReportFormatter {
                 .append(" frequent points\n");
     }
 
-    static class LineItem {
+    public static class LineItem {
         final String title;
         final double amount;
 
-        LineItem(String title, double amount) {
+        public LineItem(String title, double amount) {
             this.title = title;
             this.amount = amount;
         }

@@ -1,5 +1,7 @@
 package details;
 
+import invoicing.Customer;
+import invoicing.ReportFormatter;
 import rentals.*;
 import rentals.MovieRental;
 
