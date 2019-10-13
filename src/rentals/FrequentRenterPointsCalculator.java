@@ -13,8 +13,9 @@ class FrequentRenterPointsCalculator {
         return rentals.map(this::getPoints).reduce(0, Integer::sum);
     }
 
-    private Integer getPoints(MovieRental rental) {
-        final MovieType typeOfMovie = movieRepository.getMovie(rental.getMovieId()).getType();
+    private int getPoints(MovieRental rental) {
+        final Movie movie = movieRepository.getMovie(rental.getMovieId());
+        final MovieType typeOfMovie = movie.getType();
         final int daysRented = rental.getDays();
         return typeOfMovie.getFrequentRenterPoints(daysRented);
     }
