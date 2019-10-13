@@ -15,7 +15,7 @@ class PriceCalculator {
     }
 
     double getPrice(MovieRental rental) {
-        final MovieType typeOfMovie = repository.typeOfMovie(rental.getMovieId());
+        final MovieType typeOfMovie = repository.getMovie(rental.getMovieId()).getType();
         return typeOfMovie.getPrice(rental.getDays());
     }
 }

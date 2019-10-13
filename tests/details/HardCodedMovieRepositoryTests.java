@@ -32,7 +32,7 @@ class HardCodedMovieRepositoryTests {
                     final String movieId = entry.getKey();
                     final MovieType type = entry.getValue();
                     return dynamicTest(movieId, () ->
-                            assertEquals(type, hardCodedMovieRepository.typeOfMovie(movieId)));
+                            assertEquals(type, hardCodedMovieRepository.getMovie(movieId).getType()));
                 });
     }
 
@@ -48,7 +48,7 @@ class HardCodedMovieRepositoryTests {
                     final String movieId = entry.getKey();
                     final String title = entry.getValue();
                     return dynamicTest(movieId, () ->
-                            assertEquals(title, hardCodedMovieRepository.titleOfMovie(movieId)));
+                            assertEquals(title, hardCodedMovieRepository.getMovie(movieId).getTitle()));
                 });
     }
 }
